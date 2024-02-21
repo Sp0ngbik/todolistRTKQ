@@ -1,10 +1,10 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 
-import TodoList from '@/pages/TodoLists/TodoLists'
+import TodoListApp from '@/pages/TodoListsApp/TodoListApp'
 
 const router = createBrowserRouter([
   {
-    element: <TodoList />,
+    element: <TodoListApp />,
     path: '/',
   },
 ])

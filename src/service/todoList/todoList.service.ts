@@ -1,10 +1,10 @@
 import { baseApi } from '@/service/base-api'
-import { TodoListResponse } from '@/service/todoList/todoList.types'
+import { TodoListCreateResponse, TodoListsResponse } from '@/service/todoList/todoList.types'
 
 const todoListService = baseApi.injectEndpoints({
   endpoints(builder) {
     return {
-      createTodo: builder.mutation<any, { title: string }>({
+      createTodo: builder.mutation<TodoListCreateResponse, { title: string }>({
         invalidatesTags: ['Todos'],
         query: title => ({
           body: title,
@@ -12,15 +12,14 @@ const todoListService = baseApi.injectEndpoints({
           url: 'todo-lists',
         }),
       }),
-      deleteTodos: builder.mutation({
+      deleteTodos: builder.mutation<void, string>({
         invalidatesTags: ['Todos'],
-        query: args => ({
-          body: args,
+        query: todoListId => ({
           method: 'DELETE',
-          url: 'todo-lists',
+          url: `todo-lists/${todoListId}`,
         }),
       }),
-      getTodos: builder.query<TodoListResponse, void>({
+      getTodos: builder.query<TodoListsResponse, void>({
         providesTags: ['Todos'],
         query: () => 'todo-lists',
       }),
@@ -28,4 +27,4 @@ const todoListService = baseApi.injectEndpoints({
   },
 })
 
-export const { useCreateTodoMutation, useGetTodosQuery } = todoListService
+export const { useCreateTodoMutation, useDeleteTodosMutation, useGetTodosQuery } = todoListService

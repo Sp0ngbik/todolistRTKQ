@@ -5,4 +5,15 @@ export type TodoListBody = {
   title: string
 }
 
-export type TodoListResponse = TodoListBody[]
+export type TodoListCreateResponse = {
+  data: {
+    item: {
+      addedDate: string
+      id: string
+      order: number
+      title: string
+    }
+  }
+}
+
+export type TodoListsResponse = TodoListBody[]

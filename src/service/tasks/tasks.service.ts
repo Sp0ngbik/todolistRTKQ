@@ -12,6 +12,14 @@ const tasksService = baseApi.injectEndpoints({
           url: `todo-lists/${todoListId}/tasks`,
         }),
       }),
+      deleteTask: builder.mutation<void, { taskId: string; todoListId: string }>({
+        invalidatesTags: ['Tasks'],
+        query: args => ({
+          method: 'DELETE',
+          url: `todo-lists/${args.todoListId}/tasks/${args.taskId}`,
+        }),
+      }),
+
       getTasks: builder.query<TasksResponse, string>({
         providesTags: ['Tasks'],
         query: id => `todo-lists/${id}/tasks`,
@@ -20,4 +28,4 @@ const tasksService = baseApi.injectEndpoints({
   },
 })
 
-export const { useCreateTaskMutation, useGetTasksQuery } = tasksService
+export const { useCreateTaskMutation, useDeleteTaskMutation, useGetTasksQuery } = tasksService

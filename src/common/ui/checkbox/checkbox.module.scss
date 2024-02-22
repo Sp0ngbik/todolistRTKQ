@@ -1,0 +1,31 @@
+.checkboxRoot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 20px;
+  height: 20px;
+
+  background-color: white;
+  border-radius: 4px;
+
+  &:hover {
+    cursor: pointer;
+    background-color: #eae9e9;
+  }
+
+  &:focus {
+    outline: 1px black;
+  }
+}
+
+.checkboxIndicator {
+  width: 15px;
+  height: 15px;
+  color: green;
+}
+
+.checkBoxWrapper {
+  display: flex;
+  align-items: center;
+}

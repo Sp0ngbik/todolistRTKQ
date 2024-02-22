@@ -1,12 +1,16 @@
 .taskTitle {
-  font-size: 16px;
+  font-size: 18px;
 }
 
 .todoTitle {
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 600;
 }
 
 .editInput {
   user-select: none;
+}
+
+.errorMessage {
+  color: red;
 }

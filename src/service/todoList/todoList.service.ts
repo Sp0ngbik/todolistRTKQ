@@ -23,8 +23,21 @@ const todoListService = baseApi.injectEndpoints({
         providesTags: ['Todos'],
         query: () => 'todo-lists',
       }),
+      updateTodos: builder.mutation<void, { title: string; todoListId: string }>({
+        invalidatesTags: ['Todos'],
+        query: ({ todoListId, ...args }) => ({
+          body: args,
+          method: 'PUT',
+          url: `todo-lists/${todoListId}`,
+        }),
+      }),
     }
   },
 })
 
-export const { useCreateTodoMutation, useDeleteTodosMutation, useGetTodosQuery } = todoListService
+export const {
+  useCreateTodoMutation,
+  useDeleteTodosMutation,
+  useGetTodosQuery,
+  useUpdateTodosMutation,
+} = todoListService

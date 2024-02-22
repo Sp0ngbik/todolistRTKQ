@@ -1,5 +1,5 @@
 import { baseApi } from '@/service/base-api'
-import { CreateTask, TasksResponse } from '@/service/tasks/tasks.types'
+import { CreateTask, Task, TaskResponse, TasksResponse } from '@/service/tasks/tasks.types'
 
 const tasksService = baseApi.injectEndpoints({
   endpoints(builder) {
@@ -24,8 +24,21 @@ const tasksService = baseApi.injectEndpoints({
         providesTags: ['Tasks'],
         query: id => `todo-lists/${id}/tasks`,
       }),
+      updateTask: builder.mutation<TaskResponse, { data: Task; todoListId: string }>({
+        invalidatesTags: ['Tasks'],
+        query: args => ({
+          body: args.data,
+          method: 'PUT',
+          url: `todo-lists/${args.todoListId}/tasks/${args.data.id}`,
+        }),
+      }),
     }
   },
 })
 
-export const { useCreateTaskMutation, useDeleteTaskMutation, useGetTasksQuery } = tasksService
+export const {
+  useCreateTaskMutation,
+  useDeleteTaskMutation,
+  useGetTasksQuery,
+  useUpdateTaskMutation,
+} = tasksService

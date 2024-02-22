@@ -10,40 +10,44 @@ type TitleProps = {
   className?: string
   disabled: boolean
   onClick: () => void
+  onSubmit: (title: string) => void
   title: string
   variant?: 'taskTitle' | 'todoTitle'
 }
 
 const Title = (props: TitleProps) => {
   const [editMode, setEditMode] = useState(false)
-  const { className, disabled, onClick, title, variant = 'taskTitle' } = props
+  const { className, disabled, onClick, onSubmit, title, variant = 'taskTitle' } = props
   const {
     formState: { errors },
     handleSubmit,
     register,
-    reset,
   } = useForm<AddTask>({
     defaultValues: { title: title },
     resolver: zodResolver(addFormSchema),
   })
   const submitHandler = (data: any) => {
-    console.log(data)
-    // onSubmit(data.title)
+    onSubmit(data.title)
     setEditMode(false)
-    reset()
   }
 
   const activateEditMode = () => {
     setEditMode(true)
+  }
+  const deactivateEditMode = () => {
+    setEditMode(false)
   }
 
   return (
     <div className={className}>
       {editMode ? (
         <form onSubmit={handleSubmit(submitHandler)}>
-          <div className={s.addTaskForm}>
+          <div>
             <input {...register('title')} />
-            <button>Add task</button>
+            <button type={'submit'}>Change</button>
+            <button onClick={deactivateEditMode} type={'button'}>
+              Cancel
+            </button>
           </div>
           {errors.title && <div className={s.errorMessage}>{errors.title.message}</div>}
         </form>

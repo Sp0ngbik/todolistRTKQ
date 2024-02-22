@@ -1,4 +1,4 @@
-.taskBlock {
+.task {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -8,4 +8,9 @@
   padding-left: 10px;
 
   font-size: 18px;
+}
+
+.taskBlock {
+  display: flex;
+  align-items: center;
 }

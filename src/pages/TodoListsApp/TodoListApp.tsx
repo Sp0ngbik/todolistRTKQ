@@ -3,7 +3,6 @@ import TodoList from '@/components/TodoList/TodoList'
 import { useCreateTodoMutation, useGetTodosQuery } from '@/service/todoList/todoList.service'
 
 import s from './todoListApp.module.scss'
-
 const TodoListApp = () => {
   const { data: dataTodoLists } = useGetTodosQuery()
   const [createTodoList] = useCreateTodoMutation()

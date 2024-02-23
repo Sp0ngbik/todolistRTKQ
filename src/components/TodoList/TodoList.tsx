@@ -28,7 +28,7 @@ const TodoList = ({ todoList }: TodoListProps) => {
   }
 
   return (
-    <div className={s.todoList}>
+    <div className={s.todoList} draggable id={todoList.id}>
       <Title
         className={s.todoListHeader}
         disabled={isLoading}

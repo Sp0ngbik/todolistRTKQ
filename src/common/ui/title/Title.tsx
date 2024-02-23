@@ -42,8 +42,8 @@ const Title = (props: TitleProps) => {
     <div className={className}>
       {editMode ? (
         <form onSubmit={handleSubmit(submitHandler)}>
-          <div>
-            <input {...register('title')} />
+          <div className={s.titleBlock}>
+            <input {...register('title')} className={s.editInput} />
             <button type={'submit'}>Change</button>
             <button onClick={deactivateEditMode} type={'button'}>
               Cancel

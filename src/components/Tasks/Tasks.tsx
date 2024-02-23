@@ -42,25 +42,23 @@ const Tasks = ({ todoListId }: TaskProps) => {
 
   return (
     <div>
-      <ol>
-        {tasksData?.items.map(el => {
-          return (
-            <li className={s.taskBlock} key={el.id}>
-              <CheckBox
-                checked={el.status === TasksStatus.Completed}
-                onCheckedChange={(completed: boolean) => updateTaskStatus(el, completed)}
-              />
-              <Title
-                className={s.task}
-                disabled={isLoading}
-                onClick={deleteTaskHandler(el.id)}
-                onSubmit={(title: string) => updateTaskTitleHandler(el, title)}
-                title={el.title}
-              />
-            </li>
-          )
-        })}
-      </ol>
+      {tasksData?.items.map(el => {
+        return (
+          <li className={s.taskBlock} key={el.id}>
+            <CheckBox
+              checked={el.status === TasksStatus.Completed}
+              onCheckedChange={(completed: boolean) => updateTaskStatus(el, completed)}
+            />
+            <Title
+              className={s.task}
+              disabled={isLoading}
+              onClick={deleteTaskHandler(el.id)}
+              onSubmit={(title: string) => updateTaskTitleHandler(el, title)}
+              title={el.title}
+            />
+          </li>
+        )
+      })}
     </div>
   )
 }

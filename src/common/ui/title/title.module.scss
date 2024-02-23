@@ -7,10 +7,13 @@
   font-weight: 600;
 }
 
-.editInput {
-  user-select: none;
+.errorMessage {
+  position: absolute;
+  color: red;
 }
 
-.errorMessage {
-  color: red;
+.titleBlock {
+  & input {
+    width: 157px;
+  }
 }

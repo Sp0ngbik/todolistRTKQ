@@ -1,0 +1,53 @@
+.formSignIn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  display: flex;
+  flex-direction: column;
+
+  & input {
+    width: 350px;
+    height: 30px;
+    margin: 10px 0;
+    padding: 0 8px;
+
+    border: 1px solid black;
+    border-radius: 5px;
+
+    transition: 0.1s ease-in-out;
+
+    &:hover {
+      box-shadow: black 1px 1px 15px;
+    }
+  }
+}
+
+.sendButton {
+  align-items: center;
+
+  width: 120px;
+  height: 25px;
+  margin: 10px auto 0;
+
+  background-color: inherit;
+  border: 1px solid black;
+  border-radius: 5px;
+
+  transition: 0.2s ease-in-out;
+
+  &:hover {
+    cursor: pointer;
+    background-color: #eae9e9;
+  }
+}
+
+.errorMessage {
+  margin: 2px 0;
+  color: red;
+}
+
+.checkBox {
+  margin: 10px 0;
+}

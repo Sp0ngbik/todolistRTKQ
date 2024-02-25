@@ -4,6 +4,12 @@
   border-radius: 4px;
 }
 
+.todoListTitle {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
 .errorMessage {
   color: red;
 }

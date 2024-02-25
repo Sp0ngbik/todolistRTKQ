@@ -47,15 +47,19 @@ const Tasks = ({ todoListId }: TaskProps) => {
           <li className={s.taskBlock} key={el.id}>
             <CheckBox
               checked={el.status === TasksStatus.Completed}
+              id={el.id}
+              label={
+                <Title
+                  className={s.task}
+                  onSubmit={(title: string) => updateTaskTitleHandler(el, title)}
+                  title={el.title}
+                />
+              }
               onCheckedChange={(completed: boolean) => updateTaskStatus(el, completed)}
             />
-            <Title
-              className={s.task}
-              disabled={isLoading}
-              onClick={deleteTaskHandler(el.id)}
-              onSubmit={(title: string) => updateTaskTitleHandler(el, title)}
-              title={el.title}
-            />
+            <button disabled={isLoading} onClick={deleteTaskHandler(el.id)}>
+              X
+            </button>
           </li>
         )
       })}

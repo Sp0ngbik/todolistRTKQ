@@ -1,4 +1,4 @@
-import { LoginBody } from '@/service/auth/auth.types'
+import { LoginBody, MeResponse } from '@/service/auth/auth.types'
 import { baseApi } from '@/service/base-api'
 
 const authService = baseApi.injectEndpoints({
@@ -12,7 +12,14 @@ const authService = baseApi.injectEndpoints({
           url: '/auth/login',
         }),
       }),
-      me: builder.query<void, any>({
+      logout: builder.mutation<void, void>({
+        invalidatesTags: ['Me'],
+        query: () => ({
+          method: 'DELETE',
+          url: '/auth/login',
+        }),
+      }),
+      me: builder.query<MeResponse, void>({
         providesTags: ['Me'],
         query: () => '/auth/me',
       }),
@@ -20,4 +27,4 @@ const authService = baseApi.injectEndpoints({
   },
 })
 
-export const { useLoginMutation, useMeQuery } = authService
+export const { useLoginMutation, useLogoutMutation, useMeQuery } = authService

@@ -1,0 +1,15 @@
+.appWrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+
+  width: 100%;
+  height: 40px;
+
+  background-color: #d3cece;
+}

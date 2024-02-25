@@ -1,13 +1,21 @@
+import { Navigate } from 'react-router-dom'
+
 import AddForm from '@/common/ui/addForm/AddForm'
 import TodoList from '@/components/TodoList/TodoList'
+import { useMeQuery } from '@/service/auth/auth.service'
 import { useCreateTodoMutation, useGetTodosQuery } from '@/service/todoList/todoList.service'
 
 import s from './todoListApp.module.scss'
 const TodoListApp = () => {
   const { data: dataTodoLists } = useGetTodosQuery()
+  const { data: me } = useMeQuery()
   const [createTodoList] = useCreateTodoMutation()
   const onSubmit = async (title: string) => {
     await createTodoList({ title })
+  }
+
+  if (me?.resultCode === 1) {
+    return <Navigate to={'/sign-in'} />
   }
 
   return (

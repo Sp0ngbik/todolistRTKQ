@@ -28,15 +28,18 @@ const TodoList = ({ todoList }: TodoListProps) => {
   }
 
   return (
-    <div className={s.todoList} draggable id={todoList.id}>
-      <Title
-        className={s.todoListHeader}
-        disabled={isLoading}
-        onClick={deleteTodoHandler}
-        onSubmit={updateTodoTitleHandler}
-        title={todoList.title}
-        variant={'todoTitle'}
-      />
+    <div className={s.todoList} id={todoList.id}>
+      <div className={s.todoListTitle}>
+        <Title
+          className={s.todoListHeader}
+          onSubmit={updateTodoTitleHandler}
+          title={todoList.title}
+          variant={'todoTitle'}
+        />
+        <button disabled={isLoading} onClick={deleteTodoHandler}>
+          X
+        </button>
+      </div>
       <AddForm onSubmit={onSubmit} placeHolder={'Add new Task'} />
       <Tasks todoListId={todoList.id} />
     </div>

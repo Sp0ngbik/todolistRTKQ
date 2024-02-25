@@ -19,7 +19,7 @@
     transition: 0.1s ease-in-out;
 
     &:hover {
-      box-shadow: black 1px 1px 15px;
+      box-shadow: black 1px 1px 5px;
     }
   }
 }
@@ -50,4 +50,8 @@
 
 .checkBox {
   margin: 10px 0;
+}
+
+.signIntLabel {
+  text-align: center;
 }

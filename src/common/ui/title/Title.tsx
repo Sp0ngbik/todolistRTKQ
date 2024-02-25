@@ -8,8 +8,6 @@ import s from './title.module.scss'
 
 type TitleProps = {
   className?: string
-  disabled: boolean
-  onClick: () => void
   onSubmit: (title: string) => void
   title: string
   variant?: 'taskTitle' | 'todoTitle'
@@ -17,7 +15,7 @@ type TitleProps = {
 
 const Title = (props: TitleProps) => {
   const [editMode, setEditMode] = useState(false)
-  const { className, disabled, onClick, onSubmit, title, variant = 'taskTitle' } = props
+  const { className, onSubmit, title, variant = 'taskTitle' } = props
   const {
     formState: { errors },
     handleSubmit,
@@ -26,7 +24,7 @@ const Title = (props: TitleProps) => {
     defaultValues: { title: title },
     resolver: zodResolver(addFormSchema),
   })
-  const submitHandler = (data: any) => {
+  const submitHandler = (data: AddTask) => {
     onSubmit(data.title)
     setEditMode(false)
   }
@@ -52,14 +50,11 @@ const Title = (props: TitleProps) => {
           {errors.title && <div className={s.errorMessage}>{errors.title.message}</div>}
         </form>
       ) : (
-        <>
+        <div className={s.taskBlock}>
           <span className={s[variant]} onDoubleClick={activateEditMode}>
             {title}
           </span>
-          <button disabled={disabled} onClick={onClick}>
-            X
-          </button>
-        </>
+        </div>
       )}
     </div>
   )

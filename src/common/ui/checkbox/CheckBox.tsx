@@ -2,6 +2,7 @@ import { ComponentPropsWithoutRef, ReactNode, forwardRef } from 'react'
 
 import CheckIcon from '@/assets/icons/CheckIcon'
 import * as Checkbox from '@radix-ui/react-checkbox'
+import clsx from 'clsx'
 
 import s from './checkbox.module.scss'
 
@@ -10,8 +11,12 @@ type CheckBoxProps = { className?: string; label?: ReactNode | string } & Compon
 >
 
 const CheckBox = forwardRef<HTMLDivElement, CheckBoxProps>(({ className, ...props }, ref) => {
+  const classNames = {
+    checkBoxWrapper: clsx(s.checkBoxWrapper, className),
+  }
+
   return (
-    <div className={`${s.checkBoxWrapper} ${className}`} ref={ref}>
+    <div className={classNames.checkBoxWrapper} ref={ref}>
       <Checkbox.Root className={s.checkboxRoot} {...props}>
         <Checkbox.Indicator className={s.checkboxIndicator}>
           <CheckIcon />

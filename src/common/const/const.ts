@@ -4,3 +4,8 @@ export enum TasksStatus {
   Completed,
   Draft,
 }
+
+export enum AuthStatus {
+  Authorized,
+  NotAuthorized,
+}

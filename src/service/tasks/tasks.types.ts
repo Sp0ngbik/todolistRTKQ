@@ -33,8 +33,15 @@ export type UpdateTask = {
   completed?: TasksStatus
   deadline?: string
   description?: string
+  id: string
   priority?: number
   startDate?: string
   status?: number
   title?: string
+}
+
+export type TaskResponseError = {
+  data: {}
+  messages: string[]
+  resultCode: number
 }

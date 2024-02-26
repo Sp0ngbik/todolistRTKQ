@@ -1,6 +1,7 @@
 import { useForm } from 'react-hook-form'
 import { Navigate, useNavigate } from 'react-router-dom'
 
+import { AuthStatus } from '@/common/const/const'
 import CheckBox from '@/common/ui/checkbox/CheckBox'
 import { LoginSchema, loginSchema } from '@/components/SignIn/utils/loginSchema'
 import { useLoginMutation, useMeQuery } from '@/service/auth/auth.service'
@@ -25,7 +26,7 @@ const SignIn = () => {
     })
   }
 
-  if (me?.resultCode === 0) {
+  if (me?.resultCode === AuthStatus.Authorized) {
     return <Navigate to={'/'} />
   }
 

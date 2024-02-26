@@ -1,21 +1,24 @@
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 
+import { TasksStatus } from '@/common/const/const'
 import { AddTask, addFormSchema } from '@/common/ui/addForm/utils/addFormSchema'
 import { zodResolver } from '@hookform/resolvers/zod'
+import clsx from 'clsx'
 
 import s from './title.module.scss'
 
 type TitleProps = {
   className?: string
   onSubmit: (title: string) => void
+  status?: TasksStatus
   title: string
   variant?: 'taskTitle' | 'todoTitle'
 }
 
 const Title = (props: TitleProps) => {
   const [editMode, setEditMode] = useState(false)
-  const { className, onSubmit, title, variant = 'taskTitle' } = props
+  const { className, onSubmit, status, title, variant = 'taskTitle' } = props
   const {
     formState: { errors },
     handleSubmit,
@@ -35,6 +38,9 @@ const Title = (props: TitleProps) => {
   const deactivateEditMode = () => {
     setEditMode(false)
   }
+  const classNames = {
+    titleStyles: clsx(s[variant], status === TasksStatus.Completed && s.taskDone),
+  }
 
   return (
     <div className={className}>
@@ -51,7 +57,7 @@ const Title = (props: TitleProps) => {
         </form>
       ) : (
         <div className={s.taskBlock}>
-          <span className={s[variant]} onDoubleClick={activateEditMode}>
+          <span className={classNames.titleStyles} onDoubleClick={activateEditMode}>
             {title}
           </span>
         </div>

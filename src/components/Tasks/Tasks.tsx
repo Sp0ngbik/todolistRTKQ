@@ -1,3 +1,5 @@
+import { toast } from 'react-toastify'
+
 import { TasksStatus } from '@/common/const/const'
 import CheckBox from '@/common/ui/checkbox/CheckBox'
 import Title from '@/common/ui/title/Title'
@@ -6,7 +8,7 @@ import {
   useGetTasksQuery,
   useUpdateTaskMutation,
 } from '@/service/tasks/tasks.service'
-import { Task } from '@/service/tasks/tasks.types'
+import { Task, TaskResponseError } from '@/service/tasks/tasks.types'
 
 import s from './tasks.module.scss'
 type TaskProps = {
@@ -16,7 +18,7 @@ type TaskProps = {
 const Tasks = ({ todoListId }: TaskProps) => {
   const { data: tasksData } = useGetTasksQuery(todoListId)
   const [deleteTask, { isLoading }] = useDeleteTaskMutation()
-  const [updateTaskTitle] = useUpdateTaskMutation()
+  const [updateTask] = useUpdateTaskMutation()
   const deleteTaskHandler = (taskId: string) => async () => {
     await deleteTask({ taskId, todoListId })
   }
@@ -27,7 +29,14 @@ const Tasks = ({ todoListId }: TaskProps) => {
       title,
     }
 
-    updateTaskTitle({ data: newBodyTask, todoListId })
+    toast
+      .promise(updateTask({ data: newBodyTask, todoListId }).unwrap(), {
+        pending: 'Update in progress',
+        success: 'Task was updated',
+      })
+      .catch((err: TaskResponseError) => {
+        toast.error(err.messages[0])
+      })
   }
 
   const updateTaskStatus = (task: Task, newStatus: boolean) => {
@@ -37,7 +46,14 @@ const Tasks = ({ todoListId }: TaskProps) => {
       status,
     }
 
-    updateTaskTitle({ data: newBodyTask, todoListId })
+    toast
+      .promise(updateTask({ data: newBodyTask, todoListId }).unwrap(), {
+        pending: 'Update in progress',
+        success: 'Task status was updated',
+      })
+      .catch((err: TaskResponseError) => {
+        toast.error(err.messages[0])
+      })
   }
 
   return (
@@ -52,6 +68,7 @@ const Tasks = ({ todoListId }: TaskProps) => {
                 <Title
                   className={s.task}
                   onSubmit={(title: string) => updateTaskTitleHandler(el, title)}
+                  status={el.status}
                   title={el.title}
                 />
               }

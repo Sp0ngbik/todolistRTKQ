@@ -1,5 +1,6 @@
 import { Navigate } from 'react-router-dom'
 
+import { AuthStatus } from '@/common/const/const'
 import AddForm from '@/common/ui/addForm/AddForm'
 import TodoList from '@/components/TodoList/TodoList'
 import { useMeQuery } from '@/service/auth/auth.service'
@@ -14,7 +15,7 @@ const TodoListApp = () => {
     await createTodoList({ title })
   }
 
-  if (me?.resultCode === 1) {
+  if (me?.resultCode === AuthStatus.NotAuthorized) {
     return <Navigate to={'/sign-in'} />
   }
 

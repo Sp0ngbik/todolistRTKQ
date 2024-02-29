@@ -8,7 +8,7 @@ import {
   useGetTasksQuery,
   useUpdateTaskMutation,
 } from '@/service/tasks/tasks.service'
-import { Task, TaskResponseError } from '@/service/tasks/tasks.types'
+import { ErrorResponse, Task, TaskResponseError } from '@/service/tasks/tasks.types'
 
 import s from './tasks.module.scss'
 type TaskProps = {
@@ -51,7 +51,7 @@ const Tasks = ({ todoListId }: TaskProps) => {
         pending: 'Update in progress',
         success: 'Task status was updated',
       })
-      .catch((err: TaskResponseError) => {
+      .catch((err: ErrorResponse) => {
         toast.error(err.messages[0])
       })
   }

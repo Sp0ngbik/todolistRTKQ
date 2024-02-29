@@ -40,7 +40,7 @@ export type UpdateTask = {
   title?: string
 }
 
-export type TaskResponseError = {
+export type ErrorResponse = {
   data: {}
   messages: string[]
   resultCode: number

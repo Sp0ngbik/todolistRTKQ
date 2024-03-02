@@ -1,7 +1,10 @@
+import { toast } from 'react-toastify'
+
 import AddForm from '@/common/ui/addForm/AddForm'
 import Title from '@/common/ui/title/Title'
 import Tasks from '@/components/Tasks/Tasks'
 import { useCreateTaskMutation } from '@/service/tasks/tasks.service'
+import { ErrorResponse } from '@/service/tasks/tasks.types'
 import { useDeleteTodosMutation, useUpdateTodosMutation } from '@/service/todoList/todoList.service'
 import { TodoListBody } from '@/service/todoList/todoList.types'
 
@@ -16,7 +19,14 @@ const TodoList = ({ todoList }: TodoListProps) => {
   const [deleteTodo, { isLoading }] = useDeleteTodosMutation()
   const [updateTodoTitle] = useUpdateTodosMutation()
   const deleteTodoHandler = async () => {
-    await deleteTodo(todoList.id)
+    toast
+      .promise(deleteTodo(todoList.id), {
+        pending: 'Deleting TodoList  in progress',
+        success: 'TodoList was Deleted',
+      })
+      .catch((err: ErrorResponse) => {
+        toast.error(err.messages[0])
+      })
   }
 
   const updateTodoTitleHandler = (title: string) => {

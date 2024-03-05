@@ -34,7 +34,14 @@ const TodoList = ({ todoList }: TodoListProps) => {
   }
 
   const onSubmit = async (title: string) => {
-    await createTask({ title, todoListId: todoList.id })
+    toast
+      .promise(createTask({ title, todoListId: todoList.id }), {
+        pending: 'Creating Task',
+        success: 'Task was created',
+      })
+      .catch((err: ErrorResponse) => {
+        toast.error(err.messages[0])
+      })
   }
 
   return (
